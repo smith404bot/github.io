@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mein Portfolio | Fotos & KI</title>
+    <style>
+        :root {
+            --bg: #0a0a0f;
+            --surface: #121218;
+            --accent: #6366f1;
+            --text: #e5e7eb;
+            --muted: #9ca3af;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+
+        /* Header */
+        header {
+            padding: 3rem 0;
+            text-align: center;
+            border-bottom: 1px solid rgba(99,102,241,0.2);
+        }
+
+        h1 { font-size: 2.5rem; margin-bottom: 0.5rem; background: linear-gradient(135deg, #6366f1, #ec4899); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .subtitle { color: var(--muted); font-size: 1.1rem; }
+
+        /* Navigation */
+        nav {
+            display: flex; justify-content: center; gap: 2rem; padding: 2rem 0;
+            border-bottom: 1px solid rgba(99,102,241,0.1);
+        }
+
+        nav a {
+            color: var(--muted); text-decoration: none; font-weight: 500; transition: color 0.3s;
+        }
+
+        nav a:hover { color: var(--accent); }
+
+        /* Sections */
+        section { padding: 4rem 0; }
+        
+        .section-title {
+            font-size: 1.8rem; margin-bottom: 2rem; text-align: center;
+            background: linear-gradient(135deg, #6366f1, #ec4899); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+
+        /* Photo Grid */
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .photo-card {
+            background: var(--surface);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .photo-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(99,102,241,0.3);
+        }
+
+        .photo-image {
+            width: 100%; height: 250px; object-fit: cover; display: block;
+        }
+
+        .photo-info { padding: 1.2rem; }
+        
+        .photo-title { font-size: 1.1rem; margin-bottom: 0.3rem; color: var(--text); }
+        .photo-desc { font-size: 0.9rem; color: var(--muted); }
+
+        /* AI Projects */
+        .ai-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .ai-card {
+            background: linear-gradient(145deg, var(--surface), #1a1a2e);
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid rgba(99,102,241,0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .ai-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(99,102,241,0.25);
+        }
+
+        .ai-icon { font-size: 2rem; margin-bottom: 1rem; }
+        
+        .ai-title { font-size: 1.3rem; margin-bottom: 0.8rem; color: var(--accent); }
+        .ai-desc { font-size: 0.95rem; color: var(--muted); margin-bottom: 1rem; }
+
+        /* Footer */
+        footer {
+            text-align: center; padding: 3rem 0; border-top: 1px solid rgba(99,102,241,0.1);
+            color: var(--muted); font-size: 0.9rem; margin-top: 2rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            nav { flex-wrap: wrap; gap: 1rem; }
+            section { padding: 3rem 0; }
+        }
+
+        /* Lightbox */
+        .lightbox {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.95); z-index: 1000; justify-content: center; align-items: center;
+        }
+
+        .lightbox.active { display: flex; }
+        
+        .lightbox img { max-width: 90%; max-height: 85vh; border-radius: 8px; box-shadow: 0 0 60px rgba(99,102,241,0.3); }
+        
+        .lightbox-close {
+            position: fixed; top: 2rem; right: 2rem; color: white; font-size: 2rem; cursor: pointer; z-index: 1001;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <h1>Alex Photography & AI</h1>
+            <p class="subtitle">Fotografie • Künstliche Intelligenz • Digitale Kunst</p>
+        </div>
+    </header>
+
+    <nav>
+        <a href="#photos">📸 Meine Fotos</a>
+        <a href="#ai">🤖 KI-Projekte</a>
+        <a href="#about">ℹ️ Über mich</a>
+    </nav>
+
+    <main class="container">
+        
+        <!-- Photos Section -->
+        <section id="photos">
+            <h2 class="section-title">Meine schönsten Aufnahmen</h2>
+            
+            <div class="photo-grid">
+                <!-- Ersetze die Platzhalter-URLs mit deinen Fotos -->
+                <article class="photo-card" onclick="openLightbox('https://images.unsplash.com/photo-1492691527739-0a0f858e9c5b?w=800')">
+                    <img src="https://images.unsplash.com/photo-1492691527739-0a0f858e9c5b?w=800" alt="Landschaftsfotografie" class="photo-image">
+                    <div class="photo-info">
+                        <h3 class="photo-title">Alpenlandschaft</h3>
+                        <p class="photo-desc">Naturfotografie aus den Alpen</p>
+                    </div>
+                </article>
+
+                <article class="photo-card" onclick="openLightbox('https://images.unsplash.com/photo-1506748686214-e9bb10cfb9aa?w=800')">
+                    <img src="https://images.unsplash.com/photo-1506748686214-e9bb10cfb9aa?w=800" alt="Porträtfotografie" class="photo-image">
+                    <div class="photo-info">
+                        <h3 class="photo-title">Stadtporträt</h3>
+                        <p class="photo-desc">Urbanes Porträt in Berlin</p>
+                    </div>
+                </article>
+
+                <article class="photo-card" onclick="openLightbox('https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800')">
+                    <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800" alt="Architekturfotografie" class="photo-image">
+                    <div class="photo-info">
+                        <h3 class="photo-title">Moderne Architektur</h3>
+                        <p class="photo-desc">Gebäudedesign und Linienführung</p>
+                    </div>
+                </article>
+
+                <article class="photo-card" onclick="openLightbox('https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=800')">
+                    <img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=800" alt="Makrofotografie" class="photo-image">
+                    <div class="photo-info">
+                        <h3 class="photo-title">Naturmakro</h3>
+                        <p class="photo-desc">Detailaufnahmen aus der Natur</p>
+                    </div>
+                </article>
+
+                <article class="photo-card" onclick="openLightbox('https://images.unsplash.com/photo-1501854140884-074cf2b2c3af?w=800')">
+                    <img src="https://images.unsplash.com/photo-1501854140884-074cf2b2c3af?w=800" alt="Abendlichtfotografie" class="photo-image">
+                    <div class="photo-info">
+                        <h3 class="photo-title">Golden Hour</h3>
+                        <p class="photo-desc">Lichtstimmung beim Sonnenuntergang</p>
+                    </div>
+                </article>
+
+                <article class="photo-card" onclick="openLightbox('https://images.unsplash.com/photo-1507646227604-9d38e88b9f13?w=800')">
+                    <img src="https://images.unsplash.com/photo-1507646227604-9d38e88b9f13?w=800" alt="Wasserfall" class="photo-image">
+                    <div class="photo-info">
+                        <h3 class="photo-title">Wasserfall</h3>
+                        <p class="photo-desc">Langzeitbelichtung an einem Wasserfall</p>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- AI Projects Section -->
+        <section id="ai">
+            <h2 class="section-title">Künstliche Intelligenz Projekte</h2>
+            
+            <div class="ai-grid">
+                <article class="ai-card">
+                    <div class="ai-icon">🎨</div>
+                    <h3 class="ai-title">AI Art Generator</h3>
+                    <p class="ai-desc">Ein Web-App, die mit Stable Diffusion und Midjourney APIs kreative Bilder generiert. Features: Prompt-Eingabe, Style-Variationen, Batch-Generierung.</p>
+                </article>
+
+                <article class="ai-card">
+                    <div class="ai-icon">📸</div>
+                    <h3 class="ai-title">Photo Enhancer AI</h3>
+                    <p class="ai-desc">KI-gestützte Bildverbesserung für alte und unscharfe Fotos. Upscaling, Rauschreduktion und Farbkorrektur in Echtzeit.</p>
+                </article>
+
+                <article class="ai-card">
+                    <div class="ai-icon">🤖</div>
+                    <h3 class="ai-title">Chatbot Framework</h3>
+                    <p class="ai-desc">Modulares Chatbot-System mit LLM-Integration, Context-Memory und Multi-Language-Support für verschiedene Anwendungsfälle.</p>
+                </article>
+
+                <article class="ai-card">
+                    <div class="ai-icon">🔮</div>
+                    <h3 class="ai-title">Predictive Analytics Dashboard</h3>
+                    <p class="ai-desc">Data-Visualisierungstool mit Machine Learning Modellen für Trendvorhersagen und Mustererkennung in großen Datensätzen.</p>
+                </article>
+
+                <article class="ai-card">
+                    <div class="ai-icon">🎵</div>
+                    <h3 class="ai-title">AI Music Composer</h3>
+                    <p class="ai-desc">Generative Musik-App, die basierend auf Stimmung und Genre einzigartige Melodien komponiert.</p>
+                </article>
+
+                <article class="ai-card">
+                    <div class="ai-icon">📝</div>
+                    <h3 class="ai-title">Smart Writing Assistant</h3>
+                    <p class="ai-desc">KI-Schreibhilfe für kreatives Schreiben mit Stil-Analyse, Grammatik-Check und Ideen-Generierung.</p>
+                </article>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" style="text-align: center; max-width: 600px;">
+            <h2 class="section-title">Über mich</h2>
+            <p style="color: var(--muted); font-size: 1.1rem;">
+                Hallo! Ich bin ein Fotograf mit Leidenschaft für Natur, Porträts und urbane Landschaften. 
+                Parallel dazu experimentiere ich intensiv mit Künstlicher Intelligenz – von generativer Kunst 
+                bis zu praktischen AI-Tools für den Alltag.
+            </p>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Alex Photography & AI. Alle Rechte vorbehalten.</p>
+        </div>
+    </footer>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+        <img src="" alt="Vollbildansicht" id="lightbox-img">
+    </div>
+
+    <script>
+        function openLightbox(src) {
+            document.getElementById('lightbox').classList.add('active');
+            document.getElementById('lightbox-img').src = src;
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+        }
+
+        // Close on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeLightbox();
+        });
+    </script>
+</body>
+</html>
